@@ -1,31 +1,32 @@
 import random
 
 # generate list with random numbers
-def get_random_list(longueur: int, min: int, max: int) -> list[int]:
+def get_random_list(length: int, min_val: int, max_val: int) -> list[int]:
 
-    list_randoms = []
+    random_list = []
 
-    for i in range(longueur):
-        list_randoms.append( random.randrange(min, max))
+    for i in range(length):
+        random_list.append( random.randrange(min_val, max_val))
 
-    return list_randoms
+    return random_list
 
 # sort list
-def sort_list(list_randoms: list[int]) -> list[int]:
+def sort_list(random_list: list[int]) -> list[int]:
+    random_list.sort()
 
-    list_randoms.sort()
-    return list_randoms
+    return random_list
 
 # random nb to add
-def get_number_to_insert(min: int, max: int) -> int:
-    return random.randrange(min, max)
+def get_number_to_insert(min_val: int, max_val: int) -> int:
+
+    return random.randrange(min_val, max_val)
 
 # find index
-def dpmr(list_randoms: list[int], new_elem: int, left: int = 0, right: int = None) -> int:
+def dpmr(random_list: list[int], new_elem: int, left: int = 0, right: int = None) -> int:
 
     # boundaries set
     if right is None:
-        right = len(list_randoms) - 1
+        right = len(random_list) - 1
 
     # the new element must be inserted on the left position
     if left > right:
@@ -34,20 +35,19 @@ def dpmr(list_randoms: list[int], new_elem: int, left: int = 0, right: int = Non
     middle = (left + right) // 2
 
     # same value
-    if new_elem == list_randoms[middle]:
+    if new_elem == random_list[middle]:
         return middle
-    elif new_elem < list_randoms[middle]:
+    elif new_elem < random_list[middle]:
         # search in left
-        return dpmr(list_randoms, new_elem, left, middle - 1)
+        return dpmr(random_list, new_elem, left, middle - 1)
     else:
         # search in right
-        return dpmr(list_randoms, new_elem, middle + 1, right)
+        return dpmr(random_list, new_elem, middle + 1, right)
 
 # add new element into de sorted list
-def add_new_element(list_randoms: list[int], index, new_element) -> list[int]:
+def add_new_element(random_list: list[int], index, new_element) -> list[int]:
 
-    return list_randoms[:index] + [new_element] + list_randoms[index:]
-
+    return random_list[:index] + [new_element] + random_list[index:]
 
 def main():
 
