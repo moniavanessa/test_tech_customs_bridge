@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from main import get_random_list, sort_list, dpmr, add_new_element
+from main import get_random_list, sort_list, dpmr, add_new_element, run_main_multiple_times
 
 
 class Test(TestCase):
@@ -31,3 +31,8 @@ class Test(TestCase):
 
         self.assertEqual([2, 4, 5, 6, 7, 8, 9, 10, 11, 11, 11], add_new_element(sorted_list, index, new_elem))
 
+    # run the main function 5 times
+    def test_run_main_multiple_times(self):
+
+        run_main_multiple_times(5, 10, 1, 100)
+        

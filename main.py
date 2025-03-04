@@ -56,11 +56,8 @@ def add_new_element(random_list: list[int], index, new_element) -> list[int]:
 
     return random_list[:index] + [new_element] + random_list[index:]
 
-def main():
-
-    length = 10
-    min_val = 1
-    max_val = 100
+def main(length: int, max_val: int, min_val: int):
+    print("\n*********************   New test *********************")
     random_list = get_random_list(length, min_val, max_val)
 
     sorted_list = sort_list(random_list)
@@ -76,5 +73,12 @@ def main():
     print("Updated list:", updated_list)
 
 
+def run_main_multiple_times(times: int, length: int, min_val: int, max_val: int):
+
+    for _ in range(times):
+        main(length, min_val, max_val)
+
+
 if __name__ == "__main__":
-    main()
+
+    main(length = 10, min_val = 1, max_val = 100)
