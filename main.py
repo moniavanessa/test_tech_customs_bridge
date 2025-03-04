@@ -5,7 +5,11 @@ def get_random_list(length: int, min_val: int, max_val: int) -> list[int]:
 
     random_list = []
 
-    for i in range(length):
+    # in case min_val is bigger than max_val
+    if min_val > max_val:
+        min_val, max_val = max_val, min_val
+
+    for _ in range(length):
         random_list.append( random.randrange(min_val, max_val))
 
     return random_list
@@ -18,6 +22,9 @@ def sort_list(random_list: list[int]) -> list[int]:
 
 # random nb to add
 def get_number_to_insert(min_val: int, max_val: int) -> int:
+    # in case min_val is bigger than max_val
+    if min_val > max_val:
+        min_val, max_val = max_val, min_val
 
     return random.randrange(min_val, max_val)
 
