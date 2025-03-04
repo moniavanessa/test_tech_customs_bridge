@@ -1,7 +1,5 @@
 import random
 
-
-
 # generate list with random numbers
 def get_random_list(longueur: int, min: int, max: int) -> list[int]:
 
@@ -23,34 +21,53 @@ def get_number_to_insert(min: int, max: int) -> int:
     return random.randrange(min, max)
 
 # find index
-def dpmr(list_randoms: list[int], new_elem: int) -> int:
+def dpmr(list_randoms: list[int], new_elem: int, left: int = 0, right: int = None) -> int:
 
-    index_to_compare = int(len(list_randoms)/2)
-    middle_elem = list_randoms[index_to_compare]
+    # boundaries set
+    if right is None:
+        right = len(list_randoms) - 1
 
-    print(list_randoms)
+    # the new element must be inserted on the left position
+    if left > right:
+        return left
 
-    print("index_to_compare: ", index_to_compare)
-    print("middle_elem: ", middle_elem)
+    middle = (left + right) // 2
 
-    if len(list_randoms) == 1 :
-        print()
+    # same value
+    if new_elem == list_randoms[middle]:
+        return middle
+    elif new_elem < list_randoms[middle]:
+        # search in left
+        return dpmr(list_randoms, new_elem, left, middle - 1)
+    else:
+        # search in right
+        return dpmr(list_randoms, new_elem, middle + 1, right)
 
-        return
+# add new element into de sorted list
+def add_new_element(list_randoms: list[int], index, new_element) -> list[int]:
 
-    elif middle_elem > new_elem :
-        dpmr(list_randoms[:index_to_compare], new_elem)
-
-
-    elif middle_elem < new_elem:
-        dpmr(list_randoms[index_to_compare:], new_elem)
+    return list_randoms[:index] + [new_element] + list_randoms[index:]
 
 
+def main():
 
+    length = 10
+    min_val = 1
+    max_val = 100
+    random_list = get_random_list(length, min_val, max_val)
 
+    sorted_list = sort_list(random_list)
+    print("Sorted list:", sorted_list)
 
-# insert random nb
+    new_element = get_number_to_insert(min_val, max_val)
+    print("Number to insert:", new_element)
+
+    insert_index = dpmr(sorted_list, new_element)
+    print(f"The index to insert {new_element} is {insert_index}")
+
+    updated_list = add_new_element(sorted_list, insert_index, new_element)
+    print("Updated list:", updated_list)
+
 
 if __name__ == "__main__":
-
-    pass
+    main()
